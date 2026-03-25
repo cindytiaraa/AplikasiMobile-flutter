@@ -57,7 +57,9 @@ class MahasiswaAktifCard extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                mahasiswa.nama.substring(0, 1).toUpperCase(),
+                mahasiswa.title.isNotEmpty
+                    ? mahasiswa.title.substring(0, 1).toUpperCase()
+                    : '?',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -67,7 +69,7 @@ class MahasiswaAktifCard extends StatelessWidget {
             ),
           ),
           title: Text(
-            mahasiswa.nama,
+            mahasiswa.title,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -77,27 +79,14 @@ class MahasiswaAktifCard extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
               Text(
-                "NIM: ${mahasiswa.nim}",
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
-                  fontSize: 12,
-                ),
+                mahasiswa.title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Email: ${mahasiswa.email}",
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
-                  fontSize: 12,
-                ),
-              ),
-              Text(
-                mahasiswa.jurusan,
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
-                  fontSize: 12,
-                ),
+                mahasiswa.body,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

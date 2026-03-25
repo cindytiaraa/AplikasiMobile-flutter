@@ -1,31 +1,46 @@
-import '../../../dosen/data/models/dosen_model.dart';
+import 'dart:convert';
+import 'package:project/features/dosen/data/models/dosen_model.dart';
+// import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class DosenRepository {
-  // Mendapatkan daftar dosen
-  Future<List<DosenModel>> getDosenList() async {
-  // Simulasi network delay
-  await Future.delayed(const Duration(seconds: 1));
 
-  // Data dummy dosen
-  return [
-    DosenModel(
-      nama: 'Anank Prasetyo',
-      nip: '123456789',
-      email: 'anank.prasetyo@example.com',
-      jurusan: 'Teknik Informatika'
-    ),
-    DosenModel(
-      nama: 'Rachman Sinatriya',
-      nip: '987654321',
-      email: 'rachman.sinatriya@example.com',
-      jurusan: 'Teknik Informatika'
-    ),
-    DosenModel(
-      nama: 'Alifian Sukma',
-      nip: '456789123',
-      email: 'alifian.sukma@example.com',
-      jurusan: 'Teknik Informatika'
-    ),
-  ];
+  /// METHOD HTTP
+  // Future<List<DosenModel>> getDosenList() async {
+  //   final response = await http.get(
+  //     Uri.parse('https://jsonplaceholder.typicode.com/users'),
+  //     headers: {'Accept': 'application/json'},
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> data = jsonDecode(response.body);
+  //     print("HTTP DATA: $data");
+
+  //     return data.map((json) => DosenModel.fromJson(json)).toList();
+  //   } else {
+  //     throw Exception('Gagal memuat data dosen: ${response.statusCode}');
+  //   }
+  // }
+
+  /// METHOD DIO
+  final Dio dio = Dio();
+
+  Future<List<DosenModel>> getDosenListDio() async {
+    try {
+      final response = await dio.get(
+        'https://jsonplaceholder.typicode.com/users',
+      );
+
+      final List data = response.data;
+      print("DIO DATA: $data");
+
+      return data.map((json) => DosenModel.fromJson(json)).toList();
+
+    } catch (e) {
+      throw Exception('Gagal memuat data dosen: $e');
+    }
   }
+
+  /// Legacy method name used by provider.
+  Future<List<DosenModel>> getDosenList() => getDosenListDio();
 }
