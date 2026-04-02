@@ -7,7 +7,7 @@ class MahasiswaAktifRepository {
   Future<List<MahasiswaAktifModel>> getMahasiswaAktif() async {
     try {
       final response = await dio.get(
-        'https://jsonplaceholder.typicode.com/posts',
+        'https://jsonplaceholder.typicode.com/users',
       );
 
       final List data = response.data;

@@ -14,8 +14,11 @@ class DosenModel {
   });
 
   factory DosenModel.fromJson(Map<String, dynamic> json) {
+    final rawId = json['id'];
+    final parsedId = rawId is int ? rawId : int.tryParse(rawId?.toString() ?? '') ?? 0;
+
     return DosenModel(
-      id: json['id'] ?? '',
+      id: parsedId,
       name: json['name'] ?? '',
       username: json['username'] ?? '',
       email: json['email'] ?? '',

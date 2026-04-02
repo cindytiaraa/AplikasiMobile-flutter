@@ -35,7 +35,7 @@ class MahasiswaAktifCard extends StatelessWidget {
       ),
       elevation: 6,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -57,8 +57,8 @@ class MahasiswaAktifCard extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                mahasiswa.title.isNotEmpty
-                    ? mahasiswa.title.substring(0, 1).toUpperCase()
+                mahasiswa.nama.isNotEmpty
+                    ? mahasiswa.nama.substring(0, 1).toUpperCase()
                     : '?',
                 style: const TextStyle(
                   color: Colors.white,
@@ -69,7 +69,7 @@ class MahasiswaAktifCard extends StatelessWidget {
             ),
           ),
           title: Text(
-            mahasiswa.title,
+            mahasiswa.nama,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -80,12 +80,17 @@ class MahasiswaAktifCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                mahasiswa.title,
+                'NIM: ${mahasiswa.nim}',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                mahasiswa.body,
-                maxLines: 2,
+                mahasiswa.email,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                'Jurusan: ${mahasiswa.jurusan}',
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ],
